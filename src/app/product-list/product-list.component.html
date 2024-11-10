@@ -1,8 +1,0 @@
-<div *ngIf="products$ | async as products" class="product-list">
-    <h2>Product List</h2>
-    <div *ngFor="let product of products" class="product-item">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-      <p>Price: {{ product.price | currency }}</p>
-    </div>
-  </div>
