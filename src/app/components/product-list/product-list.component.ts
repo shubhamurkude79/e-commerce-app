@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { Apollo, gql } from 'apollo-angular';
 
 @Component({
-  selector: 'app-product-lists',
+  selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
 
-export class ProductListsComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   private apollo = inject(Apollo)
   // Initialize the signal to store products
   products = signal<ProductInterface[]>([]);
