@@ -2,11 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductInterface } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { Apollo, gql } from 'apollo-angular';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
