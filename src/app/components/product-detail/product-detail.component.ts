@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
 import { ProductInterface } from '../../models/product.model';
 import { map } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class ProductDetailComponent {
   private route = inject(ActivatedRoute);
   private apollo = inject(Apollo);
+  private location = inject(Location)
   product: ProductInterface | null = null;
 
   ngOnInit(): void {
@@ -43,6 +44,10 @@ export class ProductDetailComponent {
           this.product = product;
         });
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }
