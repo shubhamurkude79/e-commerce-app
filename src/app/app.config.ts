@@ -1,5 +1,7 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, Route } from '@angular/router';
+import { provideStore } from '@ngrx/store';
+import { cartReducer } from './store/cart/cart.reducer';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -15,5 +17,7 @@ const routes: Route[] = [
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes)]
+    provideRouter(routes),
+    provideStore({ cart: cartReducer })
+  ]
 };
