@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CartItem } from '../../store/cart/cart.state';
 import { Store } from '@ngrx/store';
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selectors';
@@ -14,8 +14,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
-  cartItems$: Observable<CartItem[]> = of([]); // Initialize as an empty array
-  total$: Observable<number> = of(0); // Initialize as 0
+  cartItems$!: Observable<CartItem[]>;
+  total$!: Observable<number>;
 
   constructor(private store: Store){
     this.cartItems$ = this.store.select(selectCartItems);

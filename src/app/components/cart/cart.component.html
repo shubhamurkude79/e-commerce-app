@@ -3,44 +3,49 @@
   
     <!-- Cart Items -->
     <div *ngIf="(cartItems$ | async) as cartItems; else emptyCart">
-      <div class="cart-item mb-4" *ngFor="let item of cartItems">
-        <div class="flex items-center border-b pb-4">
-          <img [src]="item.imageUrl" alt="{{ item.name }}" class="w-20 h-20 rounded-lg mr-4">
-          <div class="flex-1">
-            <h2 class="text-lg font-semibold">{{ item.name }}</h2>
-            <p class="text-gray-600">{{ item.description }}</p>
-            <p class="text-blue-600 font-bold">{{ item.price | currency }}</p>
-            <div class="flex items-center">
-              <span>Quantity: {{ item.quantity }}</span>
+        <div class="cart-item mb-4" *ngFor="let item of cartItems">
+          <div class="flex items-center border-b pb-4">
+            <img [src]="item.imageUrl" alt="{{ item.name }}" class="w-20 h-20 rounded-lg mr-4">
+            <div class="flex-1">
+              <h2 class="text-lg font-semibold">{{ item.name }}</h2>
+              <p class="text-gray-600">{{ item.description }}</p>
+              <p class="text-blue-600 font-bold">{{ item.price | currency }}</p>
+              <div class="flex items-center">
+                <span>Quantity: {{ item.quantity }}</span>
+              </div>
             </div>
+            <button
+              class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              (click)="removeFromCart(item.id)"
+            >
+              Remove
+            </button>
           </div>
-          <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-            (click)="removeFromCart(item.id)">
-            Remove
-          </button>
         </div>
-      </div>
-  
-      <!-- Cart Total -->
-      <div class="text-right text-xl font-bold mt-4">
-        Total: {{ (total$ | async) || 0 | currency }}
-      </div>
-  
-      <!-- Clear Cart Button -->
-      <button
-        class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900 mt-4"
-        (click)="clearCart()">
-        Clear Cart
-      </button>
-    </div>
+      
+        <!-- Cart Total -->
+        <div class="text-right text-xl font-bold mt-4">
+          Total: {{ total$ | async | currency }}
+        </div>
+      
+        <!-- Clear Cart Button -->
+        <button
+          class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900 mt-4"
+          (click)="clearCart()"
+        >
+          Clear Cart
+        </button>
+      </div>      
   
     <!-- Empty Cart Message -->
     <ng-template #emptyCart>
       <div class="text-center text-gray-500 mt-10">
         <h2 class="text-xl font-semibold mb-4">Your cart is empty</h2>
         <p>Looks like you haven't added anything to your cart yet.</p>
-        <a routerLink="/"
-          class="text-blue-600 font-bold hover:underline mt-4 inline-block">
+        <a
+          routerLink="/"
+          class="text-blue-600 font-bold hover:underline mt-4 inline-block"
+        >
           Continue Shopping
         </a>
       </div>
