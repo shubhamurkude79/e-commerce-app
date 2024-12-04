@@ -4,6 +4,9 @@ import { Apollo, gql } from 'apollo-angular';
 import { ProductInterface } from '../../models/product.model';
 import { map } from 'rxjs';
 import { CommonModule, Location } from '@angular/common';
+import { CartItem } from '../../store/cart/cart.state';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../../store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +20,8 @@ export class ProductDetailComponent {
   private apollo = inject(Apollo);
   private location = inject(Location)
   product: ProductInterface | null = null;
+
+  constructor(private store: Store){}
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
@@ -43,6 +48,16 @@ export class ProductDetailComponent {
         .subscribe((product) => {
           this.product = product;
         });
+    }
+  }
+
+  addToCart(product: ProductInterface | null): void{
+    if(product){
+      const cartItem: CartItem = {
+        ...product,
+        quantity: 1, // Default quantity
+      };
+      this.store.dispatch(addToCart({ item: cartItem }));
     }
   }
 

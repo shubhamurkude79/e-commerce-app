@@ -39,6 +39,8 @@
       <button
         type="button"
         class="mt-6 bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600"
+        (click)="addToCart(product)"
+        [disabled]="!product"
       >
         Add to Cart
       </button>
