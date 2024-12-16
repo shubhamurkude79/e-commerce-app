@@ -1,7 +1,17 @@
-<nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+<nav class="sticky top-0 z-50 bg-blue-600 p-4 text-white flex justify-between items-center">
     <div class="text-2xl font-semibold">My E-Commerce App</div>
     <div>
         <a routerLink="products" class="px-4">Products</a>
-        <a routerLink="cart" class="px-4">Cart</a>
+        <a routerLink="cart" class="px-4 relative">
+            Cart
+            <span
+            *ngIf="(cartItemCount$ | async) as count; else noItems"
+            class="absolute top-0 right-0 bg-red-500 
+            text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+            >
+            {{ count }}
+            </span>
+            <ng-template #noItems></ng-template>
+        </a>
     </div>
 </nav>
