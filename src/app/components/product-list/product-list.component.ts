@@ -1,8 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ProductInterface } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
-import { Apollo, gql } from 'apollo-angular';
 import { RouterLink } from '@angular/router';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,29 +13,15 @@ import { RouterLink } from '@angular/router';
 })
 
 export class ProductListComponent implements OnInit {
-  private apollo = inject(Apollo)
   // Initialize the signal to store products
   products = signal<ProductInterface[]>([]);
 
-  // Define the GraphQL query
-  private GET_PRODUCTS_QUERY = gql`
-    query GetProducts {
-      products {
-        id
-        name
-        description
-        price
-        imageUrl
-      }
-    }
-  `
+  constructor(private productService: ProductService) {}
+
   ngOnInit():void{
-    // Fetch products from the GraphQL server
-    this.apollo.watchQuery<{products: ProductInterface[] }>({
-      query: this.GET_PRODUCTS_QUERY,
-    }).valueChanges.subscribe((result) => {
-      // Update the signal with fetched products
-      this.products.set(result.data.products);
-    });
+    // Fetch products using the service
+    this.productService.getProducts().subscribe((products) => {
+      this.products.set(products)
+    })
   }
 }
