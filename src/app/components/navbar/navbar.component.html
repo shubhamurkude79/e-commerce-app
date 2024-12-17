@@ -1,4 +1,5 @@
-<nav class="sticky top-0 z-50 bg-blue-600 p-4 text-white flex justify-between items-center">
+<nav [ngClass]="{'bg-gray-300 shadow-md': isScrolled, 'bg-transparent': !isScrolled}"
+    class="sticky top-0 z-50 transition-all p-4 flex justify-between items-center">
     <div class="text-2xl font-semibold">My E-Commerce App</div>
     <div>
         <a routerLink="products" class="px-4">Products</a>
