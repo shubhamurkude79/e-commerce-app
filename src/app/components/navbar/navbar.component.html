@@ -1,6 +1,38 @@
 <nav [ngClass]="{'bg-gray-300 shadow-md': isScrolled, 'bg-transparent': !isScrolled}"
     class="sticky top-0 z-50 transition-all p-4 flex justify-between items-center">
+
+    <!-- brand name -->
     <div class="text-2xl font-semibold">My E-Commerce App</div>
+
+    <!-- search bar with category dropdown -->
+    <div class="flex items-center space-x-2 w-1/2">
+        <!-- category dropdown -->
+     <select 
+     [(ngModel)]="selectedCategory"
+     class="w-1/4 px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+     >
+     <option value="">All category</option>
+     <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+
+    <!-- search bar -->
+     <input 
+     [(ngModel)]="searchQuery"
+     type="text"
+     placeholder="Search products..."
+     class="w-3/4 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+     />
+
+     <!-- search button -->
+      <button
+      (click)="onSearch()"
+      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+      >
+        Search
+      </button>
+    </div>
+    
+    <!-- links -->
     <div>
         <a routerLink="products" class="px-4">Products</a>
         <a routerLink="cart" class="px-4 relative">
