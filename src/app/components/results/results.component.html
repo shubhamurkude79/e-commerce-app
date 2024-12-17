@@ -1,1 +1,49 @@
-<p>results works!</p>
+<!-- Breadcrumb Navigation -->
+<nav class="text-gray-600 text-sm mb-4">
+    Home / 
+    <span *ngIf="selectedCategory">{{ selectedCategory() }} /</span> 
+    <span class="font-semibold">{{ searchQuery() || 'All Products' }} - {{ filteredProducts().length }} items</span>
+  </nav>
+
+  <!-- Filters -->
+<div class="flex gap-4">
+    <aside class="w-1/5 bg-gray-100 p-4 rounded">
+      <h3 class="font-semibold mb-2">Filters</h3>
+
+      <!-- Brand Filter -->
+    <label class="block">Brand</label>
+    <select [(ngModel)]="selectedBrand" (change)="applyFilters()" class="w-full mb-4">
+      <option value="">All Brands</option>
+      <option *ngFor="let product of products()" [value]="product.brand">
+        {{ product.brand }}
+      </option>
+    </select>
+
+    <!-- Category Filter -->
+    <label class="block">Category</label>
+    <select [(ngModel)]="selectedCategory" (change)="applyFilters()" class="w-full">
+      <option value="">All Categories</option>
+      <option *ngFor="let product of products()" [value]="product.category">
+        {{ product.category }}
+      </option>
+    </select>
+  </aside>
+
+  <!-- Product List -->
+  <section class="w-4/5">
+    <div *ngIf="filteredProducts().length; else noResults">
+      <div *ngFor="let product of filteredProducts()" class="p-4 border rounded mb-2">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price | currency }}</p>
+        <img [src]="product.imageUrl" alt="{{ product.name }}" width="100" />
+      </div>
+    </div>
+
+    <!-- No Results -->
+    <ng-template #noResults>
+        <p>No products match your search criteria.</p>
+      </ng-template>
+    </section>
+  </div>
+
