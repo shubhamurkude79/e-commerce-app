@@ -35,7 +35,7 @@
     <div class="mt-6">
       <h2 class="text-3xl font-bold text-gray-800">{{ product.name }}</h2>
       <p class="text-gray-600 mt-2">{{ product.description }}</p>
-      <div class="text-blue-600 font-bold text-xl mt-4">{{ product.price | currency }}</div>
+      <div class="text-blue-600 font-bold text-xl mt-4">{{ product.price | currency:'INR':'symbol' }}</div>
       <button
         type="button"
         class="mt-6 bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600"
