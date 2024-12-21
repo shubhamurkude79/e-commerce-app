@@ -16,6 +16,10 @@ export class ResultsComponent implements OnInit{
   products = signal<ProductInterface[]>([]);
   filteredProducts = signal<ProductInterface[]>([]);
 
+  // Unique categories and brands
+  uniqueCategories = signal<string[]>([]);
+  uniqueBrands = signal<string[]>([]);
+
   // Search Query and Filters
   searchQuery = signal<string>('');
   selectedCategory = signal<string>('');
@@ -29,6 +33,9 @@ export class ResultsComponent implements OnInit{
   ngOnInit(): void {
     this.productService.getProducts().subscribe((products) => {
       this.products.set(products);
+      // Compute unique categories and brands
+      this.uniqueCategories.set(this.getUniqueValues(products, 'category'));
+      this.uniqueBrands.set(this.getUniqueValues(products, 'brand'));
       this.applyFilters();
     });
 
@@ -38,6 +45,15 @@ export class ResultsComponent implements OnInit{
       this.selectedCategory.set(params['category'] || '');
       this.applyFilters();
     });
+  }
+
+  // Helper method to extract unique values
+  getUniqueValues(products: ProductInterface[], key: keyof ProductInterface): string[] {
+    return Array.from(new Set(
+      products
+      .map((product) => product[key])
+      .filter((value): value is string => typeof value === 'string')
+    ));
   }
 
   applyFilters(): void {
