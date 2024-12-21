@@ -14,8 +14,8 @@
     <label class="block">Brand</label>
     <select [(ngModel)]="selectedBrand" (change)="applyFilters()" class="w-full mb-4">
       <option value="">All Brands</option>
-      <option *ngFor="let product of products()" [value]="product.brand">
-        {{ product.brand }}
+      <option *ngFor="let brand of uniqueBrands()" [value]="brand">
+        {{ brand }}
       </option>
     </select>
 
@@ -23,8 +23,8 @@
     <label class="block">Category</label>
     <select [(ngModel)]="selectedCategory" (change)="applyFilters()" class="w-full">
       <option value="">All Categories</option>
-      <option *ngFor="let product of products()" [value]="product.category">
-        {{ product.category }}
+      <option *ngFor="let category of uniqueCategories()" [value]="category">
+        {{ category }}
       </option>
     </select>
   </aside>
