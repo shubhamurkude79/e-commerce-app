@@ -1,54 +1,100 @@
-<nav [ngClass]="{'bg-gray-300 shadow-md': isScrolled, 'bg-transparent': !isScrolled}"
-    class="sticky top-0 z-50 transition-all p-4 flex justify-between items-center">
+<nav 
+  [ngClass]="{'bg-gray-300 shadow-md': isScrolled, 'bg-transparent': !isScrolled}"
+  class="sticky top-0 z-50 transition-all p-4 flex justify-between items-center"
+>
+  <!-- Logo -->
+  <div class="text-2xl space-x-2 font-semibold logo">
+    <a routerLink="products">
+      <img src="shophub-logo-resized.png" class="logo">
+    </a>
+  </div>
 
-    <!-- brand name -->
-    <div class="text-2xl font-semibold">
-        <a>
-            <img src="shophub-logo-resized.png" class="logo">
-        </a>
-    </div>
+  <!-- Desktop View -->
+  <div class="hidden md:flex items-center space-x-2 w-full">
 
-    <!-- search bar with category dropdown -->
-    <div class="flex items-center space-x-2 w-1/2">
-        <!-- category dropdown -->
-     <select 
-     [(ngModel)]="selectedCategory"
-     class="w-1/4 px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-     >
-     <option value="">All category</option>
-     <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    <!-- Category Dropdown -->
+    <select 
+      [(ngModel)]="selectedCategory"
+      class="w-1/4 px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+      <option value="">All Categories</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
     </select>
 
-    <!-- search bar -->
-     <input 
-     [(ngModel)]="searchQuery"
-     type="text"
-     placeholder="Search products..."
-     class="w-3/4 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-     />
-
-     <!-- search button -->
+    <!-- Search Bar -->
+    <div class="flex items-center w-1/2 space-x-2">
+      <input 
+        [(ngModel)]="searchQuery"
+        type="text"
+        placeholder="Search products..."
+        class="w-3/4 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+        (keydown.enter)="onSearch()"
+      />
       <button
-      (click)="onSearch()"
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        (click)="onSearch()"
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
       >
         Search
       </button>
     </div>
-    
-    <!-- links -->
-    <div>
-        <a routerLink="products" class="px-4">Products</a>
-        <a routerLink="cart" class="px-4 relative">
-            Cart
-            <span
-            *ngIf="(cartItemCount$ | async) as count; else noItems"
-            class="absolute top-0 right-0 bg-red-500 
-            text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
-            >
-            {{ count }}
-            </span>
-            <ng-template #noItems></ng-template>
-        </a>
+    <div class="space-x-2">
+        <!-- Home Link -->
+    <a routerLink="products" class="text-gray-600 hover:text-blue-500">Home</a>
+
+    <!-- Cart -->
+    <a routerLink="cart" class="relative text-gray-600 hover:text-blue-500">
+      Cart
+      <span 
+        *ngIf="(cartItemCount$ | async) as count" 
+        class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+      >
+        {{ count }}
+      </span>
+    </a>
+
+    <!-- Favorite -->
+    <a routerLink="favorites" class="text-gray-600 hover:text-blue-500">Favorite</a>
+
+    <!-- Profile -->
+    <a routerLink="profile" class="text-gray-600 hover:text-blue-500">Profile</a>
     </div>
+  </div>
+
+  <!-- Mobile View -->
+  <div class="flex md:hidden items-center space-x-2 w-full">
+    <!-- Search Bar with Icon -->
+    <div class="flex items-center w-full bg-gray-200 px-2 py-1 rounded-md">
+      <input 
+        [(ngModel)]="searchQuery"
+        type="text"
+        placeholder="Search..."
+        class="w-full bg-transparent border-none focus:outline-none"
+        (keydown.enter)="onSearch()"
+      />
+      <span class="material-icons text-gray-500 cursor-pointer" (click)="onSearch()">search</span>
+    </div>
+  </div>
 </nav>
+
+<!-- Mobile Bottom Sticky Section -->
+<div class="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-2 md:hidden">
+  <!-- Icons -->
+  <a routerLink="products" class="text-center">
+    <span class="material-icons text-gray-600">home</span>
+  </a>
+  <a routerLink="cart" class="text-center relative">
+    <span class="material-icons text-gray-600">shopping_cart</span>
+    <span 
+      *ngIf="(cartItemCount$ | async) as count" 
+      class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+    >
+      {{ count }}
+    </span>
+  </a>
+  <a routerLink="favorites" class="text-center">
+    <span class="material-icons text-gray-600">favorite</span>
+  </a>
+  <a routerLink="profile" class="text-center">
+    <span class="material-icons text-gray-600">person</span>
+  </a>
+</div>
