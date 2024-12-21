@@ -10,55 +10,67 @@
   </div>
 
   <!-- Desktop View -->
-  <div class="hidden md:flex items-center space-x-2 w-full">
+  <div class="hidden md:flex items-center space-x-4 w-full">
 
     <!-- Category Dropdown -->
     <select 
       [(ngModel)]="selectedCategory"
-      class="w-1/4 px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="w-1/5 px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
     >
       <option value="">All Categories</option>
       <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
     </select>
-
+  
     <!-- Search Bar -->
-    <div class="flex items-center w-1/2 space-x-2">
+    <div class="relative flex items-center w-2/5">
       <input 
         [(ngModel)]="searchQuery"
         type="text"
         placeholder="Search products..."
-        class="w-3/4 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+        class="w-full px-3 py-2 border rounded-md pr-10 focus:outline-none focus:ring-2 focus:ring-blue-400"
         (keydown.enter)="onSearch()"
       />
-      <button
-        (click)="onSearch()"
-        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-      >
-        Search
-      </button>
-    </div>
-    <div class="space-x-2">
-        <!-- Home Link -->
-    <a routerLink="products" class="text-gray-600 hover:text-blue-500">Home</a>
-
-    <!-- Cart -->
-    <a routerLink="cart" class="relative text-gray-600 hover:text-blue-500">
-      Cart
       <span 
-        *ngIf="(cartItemCount$ | async) as count" 
-        class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+        class="material-icons absolute right-3 text-gray-500 cursor-pointer" 
+        (click)="onSearch()"
       >
-        {{ count }}
+        search
       </span>
-    </a>
-
-    <!-- Favorite -->
-    <a routerLink="favorites" class="text-gray-600 hover:text-blue-500">Favorite</a>
-
-    <!-- Profile -->
-    <a routerLink="profile" class="text-gray-600 hover:text-blue-500">Profile</a>
     </div>
-  </div>
+  
+    <!-- Navigation Links -->
+    <div class="flex items-center space-x-4 w-2/5 justify-center">
+      <!-- Home Link -->
+      <a routerLink="products" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group">
+        <span class="material-icons">home</span>
+        <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Home</span>
+      </a>
+  
+      <!-- Cart -->
+      <a routerLink="cart" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group relative">
+        <span class="material-icons">shopping_cart</span>
+        <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Cart</span>
+        <span 
+          *ngIf="(cartItemCount$ | async) as count" 
+          class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+        >
+          {{ count }}
+        </span>
+      </a>
+  
+      <!-- Favorite -->
+      <a routerLink="favorites" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group">
+        <span class="material-icons">favorite</span>
+        <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Favorite</span>
+      </a>
+  
+      <!-- Profile -->
+      <a routerLink="profile" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group">
+        <span class="material-icons">person</span>
+        <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Profile</span>
+      </a>
+    </div>
+  </div>  
 
   <!-- Mobile View -->
   <div class="flex md:hidden items-center space-x-2 w-full">
