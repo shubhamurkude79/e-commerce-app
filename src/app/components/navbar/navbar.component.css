@@ -1,4 +1,10 @@
 .logo{
     height: 56px;
     width: auto;
+    margin-right: 2.5rem !important;
+}
+@media (max-width: 768px) {
+  .sticky-bottom-icons {
+    justify-content: space-evenly;
+  }
 }

@@ -1,4 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Apply the Poppins font globally */
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Example text styles */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600; /* Bold for headings */
+}
+
+p, span, button, input, select, textarea {
+  font-weight: 400; /* Normal weight for paragraphs and other text */
+}
+
+button, input, select, textarea {
+  font-size: 1rem; /* Adjust font size for inputs and buttons */
+}
+
+/* Optional: Customize specific elements if needed */
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
