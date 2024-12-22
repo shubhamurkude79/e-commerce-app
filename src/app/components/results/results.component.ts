@@ -4,6 +4,9 @@ import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartItem } from '../../store/cart/cart.state';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../../store/cart/cart.actions';
 
 @Component({
   selector: 'app-results',
@@ -27,7 +30,8 @@ export class ResultsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -72,5 +76,15 @@ export class ResultsComponent implements OnInit {
     });
 
     this.filteredProducts.set(filtered);
+  }
+
+  addToCart(product: ProductInterface | null): void{
+    if(product){
+      const cartItem: CartItem = {
+        ...product,
+        quantity: 1, // Default quantity
+      };
+      this.store.dispatch(addToCart({ item: cartItem }));
+    }
   }
 }
