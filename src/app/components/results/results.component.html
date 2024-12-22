@@ -80,6 +80,14 @@
         <h3 class="font-semibold">{{ product.name }}</h3>
         <p class="text-gray-600 text-sm mb-1">{{ product.description }}</p>
         <p class="font-semibold">Price: {{ product.price | currency: 'INR' : 'symbol' }}</p>
+        <button
+        type="button"
+        class="mt-6 bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600"
+        (click)="addToCart(product)"
+        [disabled]="!product"
+      >
+        Add to Cart
+      </button>
       </div>
     </div>
 
