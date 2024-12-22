@@ -10,9 +10,9 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './results.component.html',
-  styleUrl: './results.component.css'
+  styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit{
+export class ResultsComponent implements OnInit {
   products = signal<ProductInterface[]>([]);
   filteredProducts = signal<ProductInterface[]>([]);
 
@@ -22,8 +22,8 @@ export class ResultsComponent implements OnInit{
 
   // Search Query and Filters
   searchQuery = signal<string>('');
-  selectedCategory = signal<string>('');
-  selectedBrand = signal<string>('');
+  selectedCategory = signal<string>('All Categories');
+  selectedBrand = signal<string>('All Brands');
 
   constructor(
     private productService: ProductService,
@@ -34,26 +34,28 @@ export class ResultsComponent implements OnInit{
     this.productService.getProducts().subscribe((products) => {
       this.products.set(products);
       // Compute unique categories and brands
-      this.uniqueCategories.set(this.getUniqueValues(products, 'category'));
-      this.uniqueBrands.set(this.getUniqueValues(products, 'brand'));
+      this.uniqueCategories.set(['All Categories', ...this.getUniqueValues(products, 'category')]);
+      this.uniqueBrands.set(['All Brands', ...this.getUniqueValues(products, 'brand')]);
       this.applyFilters();
     });
 
     // Fetch query params for search
     this.route.queryParams.subscribe((params) => {
       this.searchQuery.set(params['query'] || '');
-      this.selectedCategory.set(params['category'] || '');
+      this.selectedCategory.set(params['category'] || 'All Categories');
       this.applyFilters();
     });
   }
 
   // Helper method to extract unique values
   getUniqueValues(products: ProductInterface[], key: keyof ProductInterface): string[] {
-    return Array.from(new Set(
-      products
-      .map((product) => product[key])
-      .filter((value): value is string => typeof value === 'string')
-    ));
+    return Array.from(
+      new Set(
+        products
+          .map((product) => product[key])
+          .filter((value): value is string => typeof value === 'string')
+      )
+    );
   }
 
   applyFilters(): void {
@@ -63,13 +65,12 @@ export class ResultsComponent implements OnInit{
 
     const filtered = this.products().filter((product) => {
       const matchesQuery = product.name.toLowerCase().includes(query);
-      const matchesCategory = category ? product.category === category : true;
-      const matchesBrand = brand ? product.brand === brand : true;
+      const matchesCategory = category === 'All Categories' || product.category === category;
+      const matchesBrand = brand === 'All Brands' || product.brand === brand;
 
       return matchesQuery && matchesCategory && matchesBrand;
     });
 
     this.filteredProducts.set(filtered);
   }
-
 }
