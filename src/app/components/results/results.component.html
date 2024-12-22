@@ -1,19 +1,60 @@
 <!-- Breadcrumb Navigation -->
-<nav class="text-gray-600 text-sm mb-4">
-    Home / 
-    <span *ngIf="selectedCategory">{{ selectedCategory() }} /</span> 
-    <span class="font-semibold">{{ searchQuery() || 'All Products' }} - {{ filteredProducts().length }} items</span>
-  </nav>
+<nav class="hidden md:block text-gray-600 text-sm mb-4">
+  Home /
+  <span *ngIf="selectedCategory() !== 'All Categories'">
+    {{ selectedCategory() }} /
+  </span>
+  <span class="font-semibold">
+    {{ searchQuery() || 'All Products' }} - {{ filteredProducts().length }} items
+  </span>
+</nav>
 
-  <!-- Filters -->
-<div class="flex gap-4">
-    <aside class="w-1/5 bg-gray-100 p-4 rounded">
-      <h3 class="font-semibold mb-2">Filters</h3>
+<!-- Search Bar -->
+<div class="flex flex-col md:flex-row gap-4 mb-4">
+  <!-- Filters Section for Mobile View -->
+  <div class="md:hidden bg-gray-100 p-2 rounded w-full">
+    <div class="flex items-center gap-2">
+      <!-- Filter Title -->
+      <h3 class="font-semibold mb-0">Filters</h3>
 
       <!-- Brand Filter -->
+      <label for="brandFilter" class="sr-only">Brand</label>
+      <select 
+        id="brandFilter" 
+        [(ngModel)]="selectedBrand" 
+        (change)="applyFilters()" 
+        class="w-1/3 p-2 border rounded"
+      >
+        <option *ngFor="let brand of uniqueBrands()" [value]="brand">
+          {{ brand }}
+        </option>
+      </select>
+
+      <!-- Category Filter -->
+      <label for="categoryFilter" class="sr-only">Category</label>
+      <select 
+        id="categoryFilter" 
+        [(ngModel)]="selectedCategory" 
+        (change)="applyFilters()" 
+        class="w-1/3 p-2 border rounded"
+      >
+        <option *ngFor="let category of uniqueCategories()" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="flex flex-col md:flex-row gap-4">
+  <!-- Filters Section for Desktop View -->
+  <aside class="hidden md:block w-1/5 bg-gray-100 p-4 rounded">
+    <h3 class="font-semibold mb-2">Filters</h3>
+
+    <!-- Brand Filter -->
     <label class="block">Brand</label>
     <select [(ngModel)]="selectedBrand" (change)="applyFilters()" class="w-full mb-4">
-      <option value="">All Brands</option>
       <option *ngFor="let brand of uniqueBrands()" [value]="brand">
         {{ brand }}
       </option>
@@ -22,7 +63,6 @@
     <!-- Category Filter -->
     <label class="block">Category</label>
     <select [(ngModel)]="selectedCategory" (change)="applyFilters()" class="w-full">
-      <option value="">All Categories</option>
       <option *ngFor="let category of uniqueCategories()" [value]="category">
         {{ category }}
       </option>
@@ -30,20 +70,22 @@
   </aside>
 
   <!-- Product List -->
-  <section class="w-4/5">
-    <div *ngIf="filteredProducts().length; else noResults">
-      <div *ngFor="let product of filteredProducts()" class="p-4 border rounded mb-2">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <p>Price: {{ product.price | currency:'INR':'symbol' }}</p>
-        <img [src]="product.imageUrl" alt="{{ product.name }}" width="100" />
+  <section class="w-full md:w-4/5">
+    <div class="result-margin" *ngIf="filteredProducts().length; else noResults">
+      <div
+        *ngFor="let product of filteredProducts()"
+        class="p-4 border rounded mb-2 flex flex-col items-center md:items-start"
+      >
+        <img [src]="product.imageUrl" alt="{{ product.name }}" class="mb-2 w-32 h-32 object-cover" />
+        <h3 class="font-semibold">{{ product.name }}</h3>
+        <p class="text-gray-600 text-sm mb-1">{{ product.description }}</p>
+        <p class="font-semibold">Price: {{ product.price | currency: 'INR' : 'symbol' }}</p>
       </div>
     </div>
 
     <!-- No Results -->
     <ng-template #noResults>
-        <p>No products match your search criteria.</p>
-      </ng-template>
-    </section>
-  </div>
-
+      <p class="text-center text-gray-500">No products match your search criteria.</p>
+    </ng-template>
+  </section>
+</div>
