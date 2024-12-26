@@ -49,8 +49,7 @@ p {
   box-sizing: border-box;
   color: #FFFFFF;
   display: flex;
-  font-family: Phantomsans, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   justify-content: center;
   line-height: 1em;
   max-width: 100%;
@@ -76,7 +75,8 @@ p {
 
 @media (min-width: 768px) {
   .unique-Btn-Style {
-    font-size: 24px;
+    font-size: 20px;
     min-width: 196px;
+    padding: 14px 18px;
   }
 }

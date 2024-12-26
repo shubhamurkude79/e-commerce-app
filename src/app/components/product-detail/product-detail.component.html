@@ -25,7 +25,7 @@
   <!-- Responsive Layout -->
   <div class="flex flex-col md:flex-row gap-6">
     <!-- Product Image Section -->
-    <div class="flex justify-center md:w-1/2">
+    <div class="flex justify-center md:w-2/3">
       <img
         [src]="product.imageUrl"
         alt="{{ product.name }}"
@@ -34,20 +34,27 @@
     </div>
 
     <!-- Product Details Section -->
-    <div class="details-margin md:w-1/2 flex flex-col justify-between">
+    <div class="details-margin md:w-1/3 flex flex-col justify-between">
       <div>
         <h2 class="text-3xl font-bold text-gray-800">{{ product.name }}</h2>
         <p class="text-gray-600 mt-2">{{ product.description }}</p>
         <div class="text-blue-600 font-bold text-xl mt-4">{{ product.price | currency:'INR':'symbol' }}</div>
       </div>
-      <div>
+      <div class="flex flex-col md:flex-row gap-2">
         <button
           type="button"
-          class="unique-Btn-Style w-full"
+          class="unique-Btn-Style flex w-1/2"
           (click)="addToCart(product)"
           [disabled]="!product"
         >
           Add to Cart
+        </button>
+        <button
+          type="button"
+          class="unique-Btn-Style flex w-1/2"
+          
+        >
+          Add to Favorite
         </button>
       </div>
     </div>
