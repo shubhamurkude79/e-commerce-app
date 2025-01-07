@@ -1,0 +1,14 @@
+.mySlides {
+  max-width: 100%;
+  height: auto;
+}
+.w3-content {
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .w3-content {
+    max-width: 100%;
+  }
+}
