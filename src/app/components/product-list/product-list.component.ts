@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ProductInterface } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { ProductService } from '../../services/product.service';
   styleUrl: './product-list.component.css'
 })
 
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   // Initialize the signal to store products
   products = signal<ProductInterface[]>([]);
   sliderImages = signal<string[]>([
@@ -22,6 +22,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     '/images/banner/banner4.png',
   ]);
   myIndex: number = 0;
+  private carouselTimeout: any; // Reference to the setTimeout
 
   constructor(private productService: ProductService) {}
 
@@ -48,6 +49,14 @@ export class ProductListComponent implements OnInit, AfterViewInit {
       this.myIndex = 1;
     }
     slides[this.myIndex - 1].style.display = "block";
-    setTimeout(() => this.carousel(), 3500); // Change image every 2 seconds
+
+    // Save the timeout reference to clear it later
+    this.carouselTimeout = setTimeout(() => this.carousel(), 3500);
+  }
+
+  ngOnDestroy(): void {
+    if(this.carouselTimeout){
+      clearTimeout(this.carouselTimeout);
+    }
   }
 }
