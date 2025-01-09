@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CartComponent } from './components/cart/cart.component';
 import { ResultsComponent } from './components/results/results.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { wishlistReducer } from './store/wishlist/wishlist.reducer';
 
 const routes: Route[] = [
   { path: 'products', component: ProductListComponent },
@@ -22,6 +23,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore({ cart: cartReducer })
+    provideStore({ cart: cartReducer, wishlist: wishlistReducer  })
   ]
 };

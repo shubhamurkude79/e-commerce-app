@@ -3,6 +3,8 @@ import { ProductInterface } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { Store } from '@ngrx/store';
+import { addToWishlist } from '../../store/wishlist/wishlist.actions';
 
 @Component({
   selector: 'app-product-list',
@@ -24,7 +26,7 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   myIndex: number = 0;
   private carouselTimeout: any; // Reference to the setTimeout
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private store: Store) {}
 
   ngOnInit():void{
     // Fetch products using the service
@@ -34,6 +36,10 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.carousel();
+  }
+
+  addToWishlist(product: ProductInterface): void {
+    this.store.dispatch(addToWishlist({ product }));
   }
 
   carousel(): void {
