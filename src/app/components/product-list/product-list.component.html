@@ -14,6 +14,13 @@
             <a [routerLink]="['/product', product.id]">
                 <button type="button" class="mt-4 unique-Btn-Style px-4 py-2 rounded">View Details</button>
             </a>
+            <button type="button" 
+                class="mt-2 unique-Btn-Style px-4 py-2 rounded" 
+                (click)="addToWishlist(product)"
+                >
+                Add to Wishlist
+            </button>
+
         </div>
     </div>
 </div>
