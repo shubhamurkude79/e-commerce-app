@@ -5,6 +5,14 @@ import { selectWishlistItems } from '../../store/wishlist/wishlist.selectors';
 import { removeFromWishlist } from '../../store/wishlist/wishlist.actions';
 import { Observable } from 'rxjs';
 
+interface WishlistItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+}
+
 @Component({
   selector: 'app-wishlist',
   standalone: true,
@@ -13,7 +21,7 @@ import { Observable } from 'rxjs';
   styleUrl: './wishlist.component.css'
 })
 export class WishlistComponent implements OnInit{
-  wishlist$!: Observable<any>;
+  wishlist$!: Observable<WishlistItem[]>;
 
   constructor(private store: Store){}
 
