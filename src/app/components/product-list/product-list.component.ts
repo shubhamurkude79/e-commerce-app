@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, signal, ViewChild, TemplateRef } from '@angular/core';
 import { ProductInterface } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -15,6 +15,8 @@ import { addToWishlist } from '../../store/wishlist/wishlist.actions';
 })
 
 export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('loading', { static: true }) loading!: TemplateRef<any>;
+
   // Initialize the signal to store products
   products = signal<ProductInterface[]>([]);
   sliderImages = signal<string[]>([
@@ -25,13 +27,17 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   ]);
   myIndex: number = 0;
   private carouselTimeout: any; // Reference to the setTimeout
+  public likedProducts: boolean[] = [];
 
-  constructor(private productService: ProductService, private store: Store) {}
+  constructor(private productService: ProductService, private store: Store) {
+    this.likedProducts = Array()
+  }
 
   ngOnInit():void{
     // Fetch products using the service
     this.productService.getProducts().subscribe((products) => {
-      this.products.set(products)
+      this.products.set(products);
+      this.likedProducts = Array(products.length).fill(false); // Initialize likedProducts here
     })
   }
   ngAfterViewInit(): void {
@@ -40,6 +46,10 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   addToWishlist(product: ProductInterface): void {
     this.store.dispatch(addToWishlist({ product }));
+  }
+
+  toggleWishlist(index: number): void {
+    this.likedProducts[index] = !this.likedProducts[index];
   }
 
   carousel(): void {
