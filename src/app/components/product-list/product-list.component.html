@@ -11,9 +11,10 @@
             <h3 class="text-lg font-semibold mt-2">{{product.name}}</h3>
             <p class="text-gray-600">{{product.description}}</p>
             <div class="text-blue-600 font-bold mt-2">{{product.price | currency:'INR':'symbol' }}</div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2">
+            <div class="flex flex-col md:flex-row gap-2">
                 <a [routerLink]="['/product', product.id]">
-                    <button type="button" class="mt-4 unique-Btn-Style px-4 py-2 min-w-[140px] max-w-full">View Details</button>
+                    <button type="button" class="mt-4 unique-Btn-Style px-4 py-2 min-w-[140px] max-w-full">View
+                        Details</button>
                 </a>
                 <button (click)="toggleWishlist(i); addToWishlist(product)"
                     class="flex items-center gap-2 mt-4 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-full shadow hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 transition whitespace-nowrap min-w-[140px] max-w-full">
@@ -26,18 +27,18 @@
                             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41.81 4.5 2.09C12.09 4.81 13.76 4 15.5 4 18 4 20 6 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                     </svg>
                     <!-- Button Text -->
-                    <span>{{ likedProducts[i] ? 'Added to Wishlist' : 'Add to Wishlist' }}</span>
+                    <span>{{ likedProducts[i] ? 'Wishlisted' : 'Wishlist' }}</span>
                 </button>
             </div>
-    </div>
-</div>
-<ng-template #loading>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-        <div *ngFor="let _ of [1, 2, 3, 4]" class="bg-white shadow-md rounded-lg p-4 animate-pulse">
-          <div class="w-full h-32 bg-gray-300 rounded-lg"></div>
-          <div class="mt-2 h-4 bg-gray-300 rounded w-3/4"></div>
-          <div class="mt-1 h-3 bg-gray-300 rounded w-2/4"></div>
-          <div class="mt-2 h-4 bg-gray-300 rounded w-1/4"></div>
         </div>
-      </div>
-</ng-template>
+    </div>
+    <ng-template #loading>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
+            <div *ngFor="let _ of [1, 2, 3, 4]" class="bg-white shadow-md rounded-lg p-4 animate-pulse">
+                <div class="w-full h-32 bg-gray-300 rounded-lg"></div>
+                <div class="mt-2 h-4 bg-gray-300 rounded w-3/4"></div>
+                <div class="mt-1 h-3 bg-gray-300 rounded w-2/4"></div>
+                <div class="mt-2 h-4 bg-gray-300 rounded w-1/4"></div>
+            </div>
+        </div>
+    </ng-template>
