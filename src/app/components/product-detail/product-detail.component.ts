@@ -7,6 +7,7 @@ import { CommonModule, Location } from '@angular/common';
 import { CartItem } from '../../store/cart/cart.state';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../store/cart/cart.actions';
+import { addToWishlist } from '../../store/wishlist/wishlist.actions';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,7 +21,8 @@ export class ProductDetailComponent {
   private apollo = inject(Apollo);
   private location = inject(Location)
   product: ProductInterface | null = null;
-
+  public likedProducts: boolean = false;
+  
   constructor(private store: Store){}
 
   ngOnInit(): void {
@@ -58,6 +60,17 @@ export class ProductDetailComponent {
         quantity: 1, // Default quantity
       };
       this.store.dispatch(addToCart({ item: cartItem }));
+    }
+  }
+
+  toggleWishlist(): void {
+    this.likedProducts = !this.likedProducts;
+  }
+  
+  addToWishlist(product: ProductInterface | null): void {
+    if (product) {
+      // Add product to the wishlist logic
+      this.store.dispatch(addToWishlist({ product }));
     }
   }
 
