@@ -42,41 +42,26 @@ p {
 
 .unique-Btn-Style {
   align-items: center;
-  background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-  border: 0;
-  border-radius: 8px;
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  display: flex;
-  font-size: 18px;
   justify-content: center;
-  line-height: 1em;
-  max-width: 100%;
-  min-width: 140px;
-  padding: 15px 20px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
+  background: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
   cursor: pointer;
-  -webkit-transition: all 2s ease-out;
-  -moz-transition: all 2s ease-out;
-  -o-transition: all 2s ease-out;
-  transition: all 2s ease-out;
+  box-shadow: rgba(151, 65, 252, 0.2) 0px 15px 30px -5px;
+  transition: all 0.3s ease-in-out;
+  line-height: 1.5;
 }
 
-.unique-Btn-Style:active,
 .unique-Btn-Style:hover {
-  outline: 0;
-  background: linear-gradient(144deg, rgba(175,64,255,1) 13%, rgba(0,221,235,1) 44%, rgba(91,66,243,1) 74%);
+  background: linear-gradient(144deg, rgba(175, 64, 255, 1) 13%, rgba(0, 221, 235, 1) 44%, rgba(91, 66, 243, 1) 74%);
 }
 
 @media (min-width: 768px) {
   .unique-Btn-Style {
-    font-size: 20px;
-    min-width: 196px;
-    padding: 14px 18px;
+    font-size: 15px;
   }
 }
