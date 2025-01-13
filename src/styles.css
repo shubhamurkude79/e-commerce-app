@@ -53,8 +53,6 @@ p {
   cursor: pointer;
   box-shadow: rgba(151, 65, 252, 0.2) 0px 15px 30px -5px;
   transition: all 0.3s ease-in-out;
-  min-width: 140px;
-  max-width: 100%;
   line-height: 1.5;
 }
 
