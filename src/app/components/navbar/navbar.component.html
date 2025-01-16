@@ -40,19 +40,13 @@
   
     <!-- Navigation Links -->
     <div class="flex items-center space-x-4 w-2/5 justify-center">
-      <!-- Home Link -->
-      <a routerLink="products" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group">
-        <span class="material-icons">home</span>
-        <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Home</span>
-      </a>
-  
       <!-- Cart -->
       <a routerLink="cart" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group relative">
         <span class="material-icons">shopping_cart</span>
         <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Cart</span>
         <span 
           *ngIf="(cartItemCount$ | async) as count" 
-          class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+          class="absolute top-0 right-0 bg-violet-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
         >
           {{ count }}
         </span>
@@ -91,14 +85,11 @@
 <!-- Mobile Bottom Sticky Section -->
 <div class="fixed bottom-0 left-0 right-0 bg-white bg-gray-400 shadow-md flex justify-around py-4 md:hidden">
   <!-- Icons -->
-  <a routerLink="products" class="text-center">
-    <span class="material-icons text-gray-600">home</span>
-  </a>
   <a routerLink="cart" class="text-center relative">
     <span class="material-icons text-gray-600">shopping_cart</span>
     <span 
       *ngIf="(cartItemCount$ | async) as count" 
-      class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+      class="absolute top-0 right-0 bg-violet-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
     >
       {{ count }}
     </span>
