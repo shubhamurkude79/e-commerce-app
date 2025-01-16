@@ -40,6 +40,16 @@ p {
   line-height: 1.5;
 }
 
+.text-primary {
+    --tw-text-opacity: 1;
+    color: rgb(55 88 249 / var(--tw-text-opacity));
+}
+
+.bg-primary {
+  --tw-bg-opacity: 1;
+    color: rgb(55 88 249 / var(--tw-bg-opacity));
+}
+
 .unique-Btn-Style {
   align-items: center;
   justify-content: center;
