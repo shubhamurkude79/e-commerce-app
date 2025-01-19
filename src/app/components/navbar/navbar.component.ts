@@ -42,5 +42,10 @@ export class NavbarComponent {
       }
     });
   }
+
+  onLogout(): void {
+    console.log('User logged out');
+    this.router.navigate(['/login']);
+  }
   
 }

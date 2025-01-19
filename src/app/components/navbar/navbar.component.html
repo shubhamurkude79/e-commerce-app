@@ -58,11 +58,42 @@
         <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Wishlist</span>
       </a>
   
-      <!-- Profile -->
-      <a routerLink="profile" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group">
-        <span class="material-icons">person</span>
-        <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Profile</span>
-      </a>
+      <!-- Profile with Dropdown -->
+      <div class="relative group">
+        <a routerLink="profile" class="flex flex-col items-center text-gray-600 hover:text-blue-500 group cursor-pointer">
+          <span class="material-icons">person</span>
+          <span class="group-hover:border-b-2 group-hover:border-blue-500 transition">Profile</span>
+        </a>
+        <div
+          class="hidden group-hover:flex flex-col absolute top-full right-0 bg-white border border-gray-300 rounded-md shadow-md py-2 w-40"
+        >
+          <a
+            routerLink="/profile"
+            class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+          >
+            Profile
+          </a>
+          <a
+            routerLink="/edit-profile"
+            class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+          >
+            Edit Profile
+          </a>
+          <a
+            routerLink="/orders"
+            class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+          >
+            Orders
+          </a>
+          <a
+            (click)="onLogout()"
+            class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 cursor-pointer"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>  
 
