@@ -8,6 +8,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { ResultsComponent } from './components/results/results.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { wishlistReducer } from './store/wishlist/wishlist.reducer';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Route[] = [
   { path: 'products', component: ProductListComponent },
@@ -15,6 +16,7 @@ const routes: Route[] = [
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'results', component: ResultsComponent },
   { path: 'wishlist', component: WishlistComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '**', redirectTo:'products', pathMatch: 'full'}
   // Add more routes as needed
 ];
