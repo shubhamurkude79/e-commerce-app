@@ -1,0 +1,70 @@
+<div class="min-h-screen bg-gray-100 flex flex-col items-center py-10">
+    <div class="bg-white rounded-lg shadow-md w-full max-w-md p-6">
+        <h3 class="text-lg font-semibold text-gray-700 mb-6">Edit Profile</h3>
+        <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+            <!-- Full Name -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Full Name</label>
+                <input type="text" formControlName="fullName" 
+                class="w-full px-4 py-2 border rounded-md" />
+                <div *ngIf="editProfileForm.get('fullName')?.invalid && editProfileForm.get('fullName')?.touched">
+                    <small class="text-red-500">Full name is required (min 3 characters).</small>
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Mobile Number</label>
+                <input type="text" formControlName="mobile" class="w-full px-4 py-2 border rounded-md" />
+                <div *ngIf="editProfileForm.get('mobile')?.invalid && editProfileForm.get('mobile')?.touched">
+                    <small class="text-red-500">Enter a valid 10-digit mobile number.</small>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Email</label>
+                <input type="email" formControlName="email" class="w-full px-4 py-2 border rounded-md" />
+                <div *ngIf="editProfileForm.get('email')?.invalid && editProfileForm.get('email')?.touched">
+                    <small class="text-red-500">Enter a valid email.</small>
+                </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Gender</label>
+                <select formControlName="gender" class="w-full px-4 py-2 border rounded-md">
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Date of Birth</label>
+                <input type="date" formControlName="dob" class="w-full px-4 py-2 border rounded-md" />
+            </div>
+
+            <!-- Location -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Location</label>
+                <input type="text" formControlName="location" class="w-full px-4 py-2 border rounded-md" />
+            </div>
+            
+            <!-- Alternate Mobile -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Alternate Mobile</label>
+                <input type="text" formControlName="alternateMobile" class="w-full px-4 py-2 border rounded-md" />
+                <div *ngIf="editProfileForm.get('alternateMobile')?.invalid && editProfileForm.get('alternateMobile')?.touched">
+                    <small class="text-red-500">Enter a valid 10-digit mobile number.</small>
+                </div>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full hover:bg-blue-600">
+                Save Changes
+            </button>
+        </form>
+    </div>
+</div>
