@@ -2,6 +2,27 @@
     <div class="bg-white rounded-lg shadow-md w-full max-w-md p-6">
         <h3 class="text-lg font-semibold text-gray-700 mb-6">Edit Profile</h3>
         <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+            <!-- Profile Image -->
+            <div class="mb-6">
+                <label class="block text-gray-700">Profile Image</label>
+                <div class="flex items-center space-x-4">
+                    <img
+                        *ngIf="imagePreview"
+                        [src]="imagePreview"
+                        alt="Profile Image Preview"
+                        class="w-20 h-20 object-cover rounded-full border"
+                    />
+                    <div>
+                        <input
+                            type="file"
+                            (change)="onImageSelected($event)"
+                            accept="image/*"
+                            class="w-full px-2 py-1 border rounded-md"
+                        />
+                        <small *ngIf="imageError" class="text-red-500">{{ imageError }}</small>
+                    </div>
+                </div>
+            </div>
             <!-- Full Name -->
             <div class="mb-4">
                 <label class="block text-gray-700">Full Name</label>

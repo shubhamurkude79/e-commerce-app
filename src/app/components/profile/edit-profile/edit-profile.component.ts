@@ -11,6 +11,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class EditProfileComponent {
   editProfileForm: FormGroup;
+  imagePreview: string | null = null;
+  imageError: string | null = null;
 
   constructor(private fb: FormBuilder){
     this.editProfileForm = this.fb.group({
@@ -44,10 +46,31 @@ export class EditProfileComponent {
     this.editProfileForm.patchValue(profileData);
   }
 
+  // Image selection and preview
+  onImageSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) { // Restrict to 2MB
+        this.imageError = 'File size must be less than 2MB';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+      this.imageError = null;
+    }
+  }
+
   // Submit the updated profile
   onSubmit(): void {
     if (this.editProfileForm.valid) {
-      const updatedProfile = this.editProfileForm.value;
+      const updatedProfile = {
+        ...this.editProfileForm.value,
+        profileImage: this.imagePreview, // Include image data
+      };
       console.log('Updated Profile:', updatedProfile);
       // Replace with service call to update the profile on the backend
     } else {
